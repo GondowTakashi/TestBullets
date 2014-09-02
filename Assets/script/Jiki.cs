@@ -39,15 +39,27 @@ public class Jiki : MonoBehaviour {
 		else{
 			//画面内に修正
 			//10<X<290,10<Y<380
-    	   	Ray screen_small = this.cam.ScreenPointToRay(new Vector3(10,10,0));
-       		Ray screen_large = this.cam.ScreenPointToRay(new Vector3(280,370,0));
+//   	   	Ray screen_small = this.cam.ScreenPointToRay(new Vector3(10,10,0));
+//    		Ray screen_large = this.cam.ScreenPointToRay(new Vector3(280,370,0));
 
-			     if(input_mouse.x < screen_small.origin.x)  input_mouse.x = screen_small.origin.x;
-			else if(input_mouse.x > screen_large.origin.x ) input_mouse.x = screen_large.origin.x;
-			     if(input_mouse.y < screen_small.origin.y)  input_mouse.y = screen_small.origin.y;
-			else if(input_mouse.y > screen_large.origin.y ) input_mouse.y = screen_large.origin.y;
+		    // 画面左下のワールド座標をビューポートから取得
+            Vector3 min = Camera.main.ViewportToWorldPoint(new Vector3(0, 0,0));
+            // 画面右上のワールド座標をビューポートから取得
+            Vector3 max = Camera.main.ViewportToWorldPoint(new Vector3(1, 1,0));
+            // プレイヤーの座標を取得
+            Vector3 pos = input_mouse;
+            // プレイヤーの位置が画面内に収まるように制限をかける
+            pos.x = Mathf.Clamp (pos.x, min.x, max.x);
+            pos.y = Mathf.Clamp (pos.y, min.y, max.y);
+            // 制限をかけた値をプレイヤーの位置とする
+            transform.position = pos;
 
-			transform.position = input_mouse;
+//			     if(input_mouse.x < screen_small.origin.x)  input_mouse.x = screen_small.origin.x;
+//			else if(input_mouse.x > screen_large.origin.x ) input_mouse.x = screen_large.origin.x;
+//			     if(input_mouse.y < screen_small.origin.y)  input_mouse.y = screen_small.origin.y;
+//			else if(input_mouse.y > screen_large.origin.y ) input_mouse.y = screen_large.origin.y;
+
+//			transform.position = input_mouse;
 			//直前の座標から左右の動きを取得して画像に反映させる
 			if(cnt!=0 && cnt % 15==0){
 				     if(input_mouse.x < before_x)   animator.Play("jiki_left");
