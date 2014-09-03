@@ -6,6 +6,8 @@ public class Enemy_bullet : MonoBehaviour {
 	public float angle;
 	public int col;
 	public int knd;
+	//0以外は特殊な挙動(画面端反射)の制御用変数
+	public int special_flag;
 	// Use this for initialization
 	void Start(){}
 
@@ -15,6 +17,7 @@ public class Enemy_bullet : MonoBehaviour {
 		this.angle = angle;
 		this.knd   = knd;
 		this.col   = col;
+		if(knd==1) this.special_flag = 1;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -26,8 +29,4 @@ public class Enemy_bullet : MonoBehaviour {
 			this.transform.position = p;
 		}
 	}
-	//カメラから不可視になったら
-	void OnBecameInvisible(){
-	    Destroy(this.gameObject);
-    }
 }
