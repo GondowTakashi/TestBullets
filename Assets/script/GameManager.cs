@@ -5,9 +5,11 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject jiki_Prefab;
 	public GameObject enemy_Prefab;
+	public GUIText LIFE;
 	public bool jiki_alive;
 	public int jiki_LIFE;
 	public int game_cnt;
+	public int score;
 
 	// Use this for initialization
 	void Start () {
@@ -26,14 +28,17 @@ public class GameManager : MonoBehaviour {
 		}
 		if(GameObject.Find("jiki")==null&&GameObject.Find("jiki(Clone)")==null) {
 			jiki_alive = false;
-			jiki_LIFE--; 
+			if(jiki_LIFE>0)	jiki_LIFE--;
 		}
 		//敵の配置			-1~+1画面内(右が＋、上が＋)
 		//    				Enemy_make(float x,float y,int hp,float speed,float angle            ,int move_knd,int shoot_knd)
-		if(game_cnt==   1)	Enemy_make(      0,      2,   100,      0.02f,-(float)(3.1415926 / 2 ),           0,           1);
+		if(game_cnt==   1)	Enemy_make(   0.30f,      2,   50,      0.01f,-(float)(3.1415926 / 4*3 ),        0,           0);
+		if(game_cnt==  61)	Enemy_make(   0.50f,      2,   50,      0.01f,-(float)(3.1415926 / 2 ),          0,           1);
+		if(game_cnt== 121)	Enemy_make(   0.70f,      2,   50,      0.01f,-(float)(3.1415926 / 4 ),          0,           0);
 
 
 		game_cnt++;
+		LIFE.text  = ("LIFE:"+ jiki_LIFE);
 	}
 	//敵を生成する関数
 	void Enemy_make(float x,float y,int hp,float speed,float angle,int move_knd,int shoot_knd){
