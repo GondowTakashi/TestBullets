@@ -37,10 +37,6 @@ public class Jiki : MonoBehaviour {
 			this.transform.position = new Vector3(0,start_y,0);
 		}
 		else{
-			//画面内に修正
-			//10<X<290,10<Y<380
-//   	   	Ray screen_small = this.cam.ScreenPointToRay(new Vector3(10,10,0));
-//    		Ray screen_large = this.cam.ScreenPointToRay(new Vector3(280,370,0));
 
 		    // 画面左下のワールド座標をビューポートから取得
             Vector3 min = Camera.main.ViewportToWorldPoint(new Vector3(0, 0,0));
@@ -53,19 +49,17 @@ public class Jiki : MonoBehaviour {
             pos.y = Mathf.Clamp (pos.y, min.y, max.y);
             // 制限をかけた値をプレイヤーの位置とする
             transform.position = pos;
-
-//			     if(input_mouse.x < screen_small.origin.x)  input_mouse.x = screen_small.origin.x;
-//			else if(input_mouse.x > screen_large.origin.x ) input_mouse.x = screen_large.origin.x;
-//			     if(input_mouse.y < screen_small.origin.y)  input_mouse.y = screen_small.origin.y;
-//			else if(input_mouse.y > screen_large.origin.y ) input_mouse.y = screen_large.origin.y;
-
-//			transform.position = input_mouse;
 			//直前の座標から左右の動きを取得して画像に反映させる
-			if(cnt!=0 && cnt % 15==0){
+			if(cnt % 15==0){
 				     if(input_mouse.x < before_x)   animator.Play("jiki_left");
 				else if(input_mouse.x > before_x)   animator.Play("jiki_right");
 				else								animator.Play("jiki_default");
 			}
+		}
+		//判定を行わない無敵時間中は点滅
+		if(cnt <= 60){
+			if(cnt%3==0)	renderer.enabled = true;
+			else			renderer.enabled = false;
 		}
 		before_x = input_mouse.x;
 		//--------------------------------------------------------------------
@@ -75,7 +69,7 @@ public class Jiki : MonoBehaviour {
 			for(int i=0;i<2;i++){
 				var go = Instantiate( jiki_bulletPrefab ) as GameObject;
 				Jiki_bullet j_bullet = go.GetComponent<Jiki_bullet>();
-
+				//First(float x,float y,float speed,float angle,int knd,int col)
 				j_bullet.First((float)(this.transform.position.x-0.1+0.2*i),this.transform.position.y,0.2f,(float)(3.1415926 / 2 ),0,0);
 			}
 		}
@@ -83,7 +77,10 @@ public class Jiki : MonoBehaviour {
 	}
 	//敵弾・敵との当たり判定
 	void OnTriggerEnter2D(){
-		Destroy(this.gameObject);
+		//生成後の上昇中から60fは判定を行わない
+		if(this.cnt > 60){
+			Destroy(this.gameObject);
+		}
 	}
 	//クリック中に射撃
 //	void OnMouseDown(){
