@@ -6,10 +6,11 @@ public class Jiki : MonoBehaviour {
 	public Vector3 mouse_position;
 	public Camera cam;
 	public GameObject jiki_bulletPrefab;
-	public int cnt;
-	public float before_x;
-	public float start_y;
-	public float start_speed;
+	private int cnt;
+	private float before_x;
+	private float start_y;
+	private float start_speed;
+	public const float PI = 3.1415926f;
 	Animator animator;
 	private void Start(){
 		animator = GetComponent(typeof(Animator)) as Animator;
@@ -70,7 +71,7 @@ public class Jiki : MonoBehaviour {
 				var go = Instantiate( jiki_bulletPrefab ) as GameObject;
 				Jiki_bullet j_bullet = go.GetComponent<Jiki_bullet>();
 				//First(float x,float y,float speed,float angle,int knd,int col)
-				j_bullet.First((float)(this.transform.position.x-0.1+0.2*i),this.transform.position.y,0.2f,(float)(3.1415926 / 2 ),0,0);
+				j_bullet.First((float)(this.transform.position.x-0.1+0.2*i),this.transform.position.y,0.2f,(float)(PI / 2 ),0,0);
 			}
 		}
 		cnt++;
@@ -88,7 +89,7 @@ public class Jiki : MonoBehaviour {
 //			var go = Instantiate( jiki_bulletPrefab ) as GameObject;
 //			Jiki_bullet j_bullet = go.GetComponent<Jiki_bullet>();
 //
-//			j_bullet.First((float)(this.transform.position.x-0.02+0.04*i),this.transform.position.y,0.04f,(float)(3.1415926 / 2 ),0,0);
+//			j_bullet.First((float)(this.transform.position.x-0.02+0.04*i),this.transform.position.y,0.04f,(float)(PI / 2 ),0,0);
 //		}
 //	}
 	//被弾後の処理
