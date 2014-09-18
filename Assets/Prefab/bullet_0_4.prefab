@@ -9,11 +9,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  - 58: {fileID: 5800000}
-  - 114: {fileID: 11400000}
   - 50: {fileID: 5000000}
-  m_Layer: 9
-  m_Name: enemy_0
+  - 114: {fileID: 11400000}
+  - 58: {fileID: 5800000}
+  m_Layer: 10
+  m_Name: bullet_0_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.84411144, y: -1.92108572, z: 0}
+  m_LocalPosition: {x: -2.05260444, y: -1.39552081, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,7 +45,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!58 &5800000
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -54,8 +54,8 @@ CircleCollider2D:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Radius: .200000003
+  m_IsTrigger: 0
+  m_Radius: .0599999987
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -65,12 +65,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c6c5d89d81e4ff395a6fefb10474d6, type: 3}
+  m_Script: {fileID: 11500000, guid: de2a02d78fc2c474fa43e65b246f74d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  e_bullet0Prefab: {fileID: 100000, guid: 97639c86e6582406f85d9a683cddd9b6, type: 2}
-  e_bullet1Prefab: {fileID: 100000, guid: 1db08afc90875467ca36dad49b370072, type: 2}
-  enemy_hp_Prefab: {fileID: 100000, guid: 4a09b9f83e0734dc9b93fe97fd4a9bfa, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -91,7 +88,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: c402e19355c0c485d8bf911a64dc918b, type: 3}
+  m_Sprite: {fileID: 21300046, guid: c402e19355c0c485d8bf911a64dc918b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
