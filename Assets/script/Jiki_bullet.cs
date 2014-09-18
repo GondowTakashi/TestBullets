@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Jiki_bullet : MonoBehaviour {
-	public float speed;
-	public float angle;
-	public int col;
-	public int knd;
+	private float speed;
+	private float angle;
+	private int col;
+	private int knd;
 	// Use this for initialization
 	void Start(){}
 
