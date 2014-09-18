@@ -9,9 +9,11 @@ public class Enemy : MonoBehaviour {
 	public int move_knd;
 	public int shoot_knd;	
 	public GameObject e_bulletPrefab;
+	public GameObject enemy_hp_Prefab;
 	// Use this for initialization
 	void Start () {
 		cnt   = 0 ;
+
 	}
 	public void First(float x,float y,int hp,float speed,float angle,int move_knd,int shoot_knd) {
 		this.transform.position = new Vector3(x,y,0);
@@ -86,6 +88,9 @@ public class Enemy : MonoBehaviour {
 		if (layerName == "bullet_jiki" ){
 			Destroy(collider.gameObject);
 			this.hp--;
+			var go2 = Instantiate( enemy_hp_Prefab) as GameObject;
+			GUIText hp_text = go2.GetComponent<GUIText>();
+			hp_text.text = "" +this.hp;
 			if(this.hp<=0){
 				Destroy(this.gameObject);
 			}
