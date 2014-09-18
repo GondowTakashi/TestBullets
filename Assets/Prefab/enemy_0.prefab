@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.26620722, y: 1.29659045, z: 0}
+  m_LocalPosition: {x: -1.84411144, y: -1.92108572, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,6 +75,7 @@ MonoBehaviour:
   move_knd: 0
   shoot_knd: 0
   e_bulletPrefab: {fileID: 100000, guid: 97639c86e6582406f85d9a683cddd9b6, type: 2}
+  enemy_hp_Prefab: {fileID: 100000, guid: 4a09b9f83e0734dc9b93fe97fd4a9bfa, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
