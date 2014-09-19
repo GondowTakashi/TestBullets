@@ -68,13 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c6c5d89d81e4ff395a6fefb10474d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  angle: 0
-  hp: 0
-  cnt: 0
-  move_knd: 0
-  shoot_knd: 0
-  e_bulletPrefab: {fileID: 100000, guid: 97639c86e6582406f85d9a683cddd9b6, type: 2}
+  e_bullet0Prefab: {fileID: 100000, guid: 97639c86e6582406f85d9a683cddd9b6, type: 2}
+  e_bullet1Prefab: {fileID: 100000, guid: 1db08afc90875467ca36dad49b370072, type: 2}
   enemy_hp_Prefab: {fileID: 100000, guid: 4a09b9f83e0734dc9b93fe97fd4a9bfa, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:

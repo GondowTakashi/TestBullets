@@ -10,7 +10,8 @@ public class Jiki : MonoBehaviour {
 	private float before_x;
 	private float start_y;
 	private float start_speed;
-	public const float PI = 3.1415926f;
+	//代入せずにそのままでも使用可
+	public const float PI = Common.Constant.PI;
 	Animator animator;
 	private void Start(){
 		animator = GetComponent(typeof(Animator)) as Animator;
