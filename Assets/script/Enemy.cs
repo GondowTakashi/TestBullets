@@ -7,12 +7,12 @@ public class Enemy : MonoBehaviour {
 	private float angle;
 	private int hp;
 	private int cnt;
+	private Common.Enemy knd;
 	private int move_knd;
 	private int shoot_knd;
 	private bool stop_flag;
 	public GameObject e_bullet0Prefab;
 	public GameObject e_bullet1Prefab;
-	//代入せずにそのままでも使用可
 	public const float PI = Common.Constant.PI;
 
 	// Use this for initialization
@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour {
 		this.move_knd   = move_knd;
 		this.shoot_knd  = shoot_knd;
 		this.stop_flag  = false;
+		if(move_knd>=10) this.knd = Common.Enemy.boss;
+		else			 this.knd = Common.Enemy.normal;
 	}
 	
 	// Update is called once per frame
@@ -72,7 +74,7 @@ public class Enemy : MonoBehaviour {
 						}
 					}
 				}
-				if(t==600||t==900){
+				if(t==599||t==899){
 					float rx,ry;
 					rx = 0.2f + 0.6f * Random.value;
 					ry = 0.4f + 0.5f * Random.value;
@@ -93,64 +95,66 @@ public class Enemy : MonoBehaviour {
 	//---------弾幕定義--------------
 	//弾幕定義まとめ
 	void ShootBullet(int knd){
+		var go = GameObject.Find("back") as GameObject;
+		GameManager game = go.GetComponent(typeof(GameManager)) as GameManager;
 		switch(knd){
 			case 0://自機方向1way3弾
-				if(cnt == 60)	Shoot_Aim(1,3,0.03f);
+				if(cnt == 60)	Shoot_Aim(1,1+game.GetLevel(),0.03f);
 				break;
 			case 1://6fおきに1f0.3π回転する渦巻
-				if(cnt % 6== 0 )	ShootBullet_1(0.3f,0.02f);
+				if(cnt % (12/game.GetLevel()) == 0 )	ShootBullet_1(0.3f,0.02f);
 				break;
 			case 2://１の逆回転版
-				if(cnt % 6== 0 )	ShootBullet_1(-0.3f,0.02f);
+				if(cnt % (12/game.GetLevel()) == 0 )	ShootBullet_1(-0.3f,0.02f);
 				break;
-			case 3://120f中20fおきに8方向
+			case 3://120f中30fおきに8方向
 				if( (60<=cnt&&cnt<=180)&&(cnt % 30== 0 )){
-					ShootBullet_0(8,0.02f);
+					ShootBullet_0(4*game.GetLevel(),0.02f);
 				}
 				break;
 			case 4://回転円形弾10fおきに4方向1f0.5π回転
 				if(cnt % 10== 0 ){
-					ShootBullet_0_spin(4,0.6f,0.02f);
+					ShootBullet_0_spin(2*game.GetLevel(),0.6f,0.02f);
 				}
 				break;
 			case 5://４の逆回転版
 				if(cnt % 10== 0 ){
-					ShootBullet_0_spin(4,-0.6f,0.02f);
+					ShootBullet_0_spin(2*game.GetLevel(),-0.6f,0.02f);
 				}
 				break;
 			case 6://下方向５弾
-				if(cnt == 60)	Shoot_under(5,0.02f);
+				if(cnt == 60)	Shoot_under(1+2*game.GetLevel(),0.02f);
 				break;
 			//-----ボス制御-----
 			case 10:
 				int t = cnt % 1200;
 				if(t<300){//1:ランダム移動しながら円形弾
 					if(this.hp < 200){
-						if(t % 20 == 0 )	ShootBullet_0(12,0.02f);
+						if(t % 20 == 0 )	ShootBullet_0(6*game.GetLevel(),0.02f);
 					}
 					else{
-						if(t % 60 == 0 )	ShootBullet_0(8,0.03f);
+						if(t % 60 == 0 )	ShootBullet_0(4*game.GetLevel(),0.03f);
 					}
 				}
 				else if(t<600){//2:自機方向5way5弾
 					if(t % 60 == 0 ){
 						int x;
-						if(this.hp < 200) x = 9;
-						else			  x = 5;
-						Shoot_Aim(x,5,0.04f);
+						if(this.hp < 200) x = 1+4*game.GetLevel();
+						else			  x = 1+2*game.GetLevel();
+						Shoot_Aim(x,2*game.GetLevel(),0.04f);
 					}
 				}
 				else if(t<900){//3:回転円形両方向同時
 					if(t % 15== 0 ){
 						int x;
-						if(this.hp < 200) x = 6;
-						else			  x = 4;
-						ShootBullet_0_spin(x, 0.4f,0.02f);
+						if(this.hp < 200) x = 3*game.GetLevel();
+						else			  x = 2*game.GetLevel();
+						ShootBullet_0_spin(x, 0.3f,0.02f);
 						ShootBullet_0_spin(x,-0.5f,0.02f);
 					}
 				}
 				else{//4:ランダムばらまき	
-					if(t % 3 == 0){
+					if(t % (6/game.GetLevel()) == 0){
 						Shoot_random();
 						//追加
 						if(this.hp < 200)	Shoot_random();
@@ -169,7 +173,7 @@ public class Enemy : MonoBehaviour {
 			Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 			//First(float x,float y,float speed,float angle,int knd,int col) 
 			e_bullet.First(this.transform.position.x,this.transform.position.y,spd,
-				(float)(2*PI / n * i + angle ),0,0);
+				(float)(2*PI / n * i + angle ));
 		}
 	}
 	//０の回転する版(1fでPI*n回転)
@@ -182,7 +186,7 @@ public class Enemy : MonoBehaviour {
 			Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 			//First(float x,float y,float speed,float angle,int knd,int col) 
 			e_bullet.First(this.transform.position.x,this.transform.position.y,spd,
-				(float)(2*PI / n * i + angle ),0,0);
+				(float)(2*PI / n * i + angle ));
 		}
 	}
 	//1:渦巻き(1fでPI*n回転)
@@ -193,7 +197,7 @@ public class Enemy : MonoBehaviour {
 		Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 		//First(float x,float y,float speed,float angle,int knd,int col) 
 		e_bullet.First(this.transform.position.x,this.transform.position.y,spd,
-			(float)(2*PI / 60 * n * this.cnt ),0,0);
+			(float)(2*PI / 60 * n * this.cnt ));
 	}
 	//2:自機方向(way方向n弾)
 	void Shoot_Aim(int way,int n,float spd){
@@ -212,7 +216,7 @@ public class Enemy : MonoBehaviour {
 				Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 				//First(float x,float y,float speed,float angle,int knd,int col) 
 				e_bullet.First(this.transform.position.x,this.transform.position.y,spd+0.004f*j,
-					aiming_angle,0,0);
+					aiming_angle);
 			}
 			return;
 		}
@@ -223,7 +227,7 @@ public class Enemy : MonoBehaviour {
 				Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 				//First(float x,float y,float speed,float angle,int knd,int col) 
 				e_bullet.First(this.transform.position.x,this.transform.position.y,spd+0.004f*j,
-					(float)(aiming_angle - PI/2*(way*0.1f) + PI*(way*0.1f)/(way-1)*i  ),0,0);
+					(float)(aiming_angle - PI/2*(way*0.1f) + PI*(way*0.1f)/(way-1)*i  ));
 			}
 		}
 	}
@@ -234,7 +238,7 @@ public class Enemy : MonoBehaviour {
 				Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 				//First(float x,float y,float speed,float angle,int knd,int col) 
 				e_bullet.First(this.transform.position.x,this.transform.position.y,spd+0.004f*j,
-					-(float)(PI/2),0,0);
+					-(float)(PI/2));
 			}
 	}
 	//4:ランダムばらまき
@@ -243,13 +247,13 @@ public class Enemy : MonoBehaviour {
 		Enemy_bullet e_bullet = go.GetComponent<Enemy_bullet>();
 		//First(float x,float y,float speed,float angle,int knd,int col) 
 		e_bullet.First(this.transform.position.x,this.transform.position.y,
-			0.01f+0.03f*Random.value,2*PI*Random.value,0,0);
+			0.005f+0.02f*Random.value,2*PI*Random.value);
 
 		var go1 = Instantiate( e_bullet1Prefab ) as GameObject;
 		Enemy_bullet e_bullet1 = go1.GetComponent<Enemy_bullet>();
 		//First(float x,float y,float speed,float angle,int knd,int col) 
 		e_bullet1.First(this.transform.position.x,this.transform.position.y,
-			0.02f+0.04f*Random.value,2*PI*Random.value,0,0);
+			0.01f+0.03f*Random.value,2*PI*Random.value);
 
 	}
 	//------------------------------
@@ -266,12 +270,11 @@ public class Enemy : MonoBehaviour {
 			game.AddScore(1);
 			//ヒットした敵のHP表示
 			game.enemy_hp.text = "" +this.hp;
-			//ボスの場合は大きく表示
-			if(this.move_knd==10)	game.enemy_hp.fontSize = 50;
-			else					game.enemy_hp.fontSize = 30;
+			if(this.knd == Common.Enemy.boss){
+				game.enemy_hp.fontSize = (int)(50 * Common.Constant.window_rate);
+			}
 			if(this.hp<=0){
-				//ボス
-				if(this.move_knd==10){
+				if(this.knd == Common.Enemy.boss){
 					game.AddScore(2000);
 					game.GameClear();
 				}
