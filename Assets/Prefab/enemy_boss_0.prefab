@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   e_bullet0Prefab: {fileID: 100000, guid: b58e3c521a26c4916bf39c4d75242124, type: 2}
   e_bullet1Prefab: {fileID: 100000, guid: 675a185bfe719407cb67f04ac4846a94, type: 2}
+  pointPrefab: {fileID: 100000, guid: b7c96c747013f4b38aab4ab5deba1f20, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
 	private float speed;
 	private float angle;
 	private int hp;
+	private int item_num;
 	private int cnt;
 	private Common.Enemy knd;
 	private int move_knd;
@@ -13,14 +14,15 @@ public class Enemy : MonoBehaviour {
 	private bool stop_flag;
 	public GameObject e_bullet0Prefab;
 	public GameObject e_bullet1Prefab;
+	public GameObject pointPrefab;
 	public const float PI = Common.Constant.PI;
 
 	// Use this for initialization
 	void Start () {
 		cnt   = 0 ;
-
 	}
-	public void First(float x,float y,int hp,float speed,float angle,int move_knd,int shoot_knd) {
+	public void First(float x,float y,int hp,float speed,float angle,int move_knd,int shoot_knd,
+		Common.Enemy knd,int item) {
 		this.transform.position = new Vector3(x,y,0);
 		this.hp         = hp;
 		this.speed      = speed;
@@ -28,8 +30,8 @@ public class Enemy : MonoBehaviour {
 		this.move_knd   = move_knd;
 		this.shoot_knd  = shoot_knd;
 		this.stop_flag  = false;
-		if(move_knd>=10) this.knd = Common.Enemy.boss;
-		else			 this.knd = Common.Enemy.normal;
+		this.knd 		= knd;
+		this.item_num   = item;
 	}
 	
 	// Update is called once per frame
@@ -281,9 +283,18 @@ public class Enemy : MonoBehaviour {
 				else{
 					game.AddScore(100);
 				}
+				ItemMake(this.item_num);
 				Destroy(this.gameObject);
 			}
         }
 	}
+	//アイテム生成
+	void ItemMake(int num){
+		for(int i=0;i<num;i++){
+			var go = Instantiate( pointPrefab ) as GameObject;
+			PointItem item = go.GetComponent<PointItem>();
+			item.First(this.transform.position.x,this.transform.position.y);
+		}
 
+	}
 }

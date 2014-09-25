@@ -121,34 +121,34 @@ public class GameManager : MonoBehaviour {
 			if(jiki_life>=0)	jiki_life--;
 		}
 		//敵の配置			-1~+1画面内(右が＋、上が＋)
-		//    				Enemy_make(float x,float y,int hp,float speed,float angle        ,int move_knd,int shoot_knd)
+		//    				Enemy_make(float x,float y,hp,speed,float angle        ,move,shoot,knd,item)
 		//1:５体降下のみ自機狙い1way3弾
-		if(game_cnt==   0)	Enemy_make( -0.60f,      2,    20,      0.02f,-(float)(PI / 2   ),           0,            0);
-		if(game_cnt==  60)	Enemy_make( -0.30f,      2,    20,      0.02f,-(float)(PI / 2   ),           0,            0);
-		if(game_cnt== 120)	Enemy_make(  0.00f,      2,    20,      0.02f,-(float)(PI / 2   ),           0,            0);
-		if(game_cnt== 180)	Enemy_make(  0.30f,      2,    20,      0.02f,-(float)(PI / 2   ),           0,            0);
-		if(game_cnt== 240)	Enemy_make(  0.60f,      2,    20,      0.02f,-(float)(PI / 2   ),           0,            0);
+		if(game_cnt==   0)	Enemy_make( -0.60f,      2,20,0.02f,-(float)(PI / 2   ),   0,    0,Common.Enemy.normal,2);
+		if(game_cnt==  60)	Enemy_make( -0.30f,      2,20,0.02f,-(float)(PI / 2   ),   0,    0,Common.Enemy.normal,2);
+		if(game_cnt== 120)	Enemy_make(  0.00f,      2,20,0.02f,-(float)(PI / 2   ),   0,    0,Common.Enemy.normal,2);
+		if(game_cnt== 180)	Enemy_make(  0.30f,      2,20,0.02f,-(float)(PI / 2   ),   0,    0,Common.Enemy.normal,2);
+		if(game_cnt== 240)	Enemy_make(  0.60f,      2,20,0.02f,-(float)(PI / 2   ),   0,    0,Common.Enemy.normal,2);
 		//2:２体渦巻き左右斜め方向転換
-		if(game_cnt== 300)	Enemy_make( -0.25f,      2,    40,      0.01f,-(float)(PI / 4   ),           1,            1);
-		if(game_cnt== 300)	Enemy_make(  0.25f,      2,    40,      0.01f,-(float)(PI*3/4   ),           1,            2);
+		if(game_cnt== 300)	Enemy_make( -0.25f,      2,30,0.01f,-(float)(PI / 4   ),   1,    1,Common.Enemy.normal,3);
+		if(game_cnt== 300)	Enemy_make(  0.25f,      2,30,0.01f,-(float)(PI*3/4   ),   1,    2,Common.Enemy.normal,3);
 		//3:120f円形弾後降りる
-		if(game_cnt== 480)	Enemy_make( -0.80f,      2,    20,      0.02f,-(float)(PI / 2   ),           2,            3);
-		if(game_cnt== 540)	Enemy_make( -0.40f,      2,    20,      0.02f,-(float)(PI / 2   ),           2,            3);
-		if(game_cnt== 600)	Enemy_make(  0.00f,      2,    20,      0.02f,-(float)(PI / 2   ),           2,            3);
-		if(game_cnt== 660)	Enemy_make(  0.40f,      2,    20,      0.02f,-(float)(PI / 2   ),           2,            3);
-		if(game_cnt== 720)	Enemy_make(  0.80f,      2,    20,      0.02f,-(float)(PI / 2   ),           2,            3);
+		if(game_cnt== 480)	Enemy_make( -0.80f,      2,20,0.02f,-(float)(PI / 2   ),   2,    3,Common.Enemy.normal,2);
+		if(game_cnt== 540)	Enemy_make( -0.40f,      2,20,0.02f,-(float)(PI / 2   ),   2,    3,Common.Enemy.normal,2);
+		if(game_cnt== 600)	Enemy_make(  0.00f,      2,20,0.02f,-(float)(PI / 2   ),   2,    3,Common.Enemy.normal,2);
+		if(game_cnt== 660)	Enemy_make(  0.40f,      2,20,0.02f,-(float)(PI / 2   ),   2,    3,Common.Enemy.normal,2);
+		if(game_cnt== 720)	Enemy_make(  0.80f,      2,20,0.02f,-(float)(PI / 2   ),   2,    3,Common.Enemy.normal,2);
 		//4:２体x3回転円形弾
-		if(game_cnt== 840)	Enemy_make( -0.50f,      2,    30,      0.01f,-(float)(PI / 4   ),           0,            4);
-		if(game_cnt== 840)	Enemy_make(  0.50f,      2,    30,      0.01f,-(float)(PI*3/4   ),           0,            5);
-		if(game_cnt==1020)	Enemy_make( -0.30f,      2,    30,      0.01f,-(float)(PI / 4   ),           0,            5);
-		if(game_cnt==1020)	Enemy_make(  0.30f,      2,    30,      0.01f,-(float)(PI*3/4   ),           0,            4);
-		if(game_cnt==1200)	Enemy_make( -1.75f,   0.7f,    30,      0.01f,                 0 ,           0,            4);
-		if(game_cnt==1200)	Enemy_make(  1.75f,   0.8f,    30,      0.01f,                PI ,           0,            5);
+		if(game_cnt== 840)	Enemy_make( -0.50f,      2,30,0.01f,-(float)(PI / 4   ),   0,    4,Common.Enemy.normal,4);
+		if(game_cnt== 840)	Enemy_make(  0.50f,      2,30,0.01f,-(float)(PI*3/4   ),   0,    5,Common.Enemy.normal,4);
+		if(game_cnt==1020)	Enemy_make( -0.30f,      2,30,0.01f,-(float)(PI / 4   ),   0,    5,Common.Enemy.normal,4);
+		if(game_cnt==1020)	Enemy_make(  0.30f,      2,30,0.01f,-(float)(PI*3/4   ),   0,    4,Common.Enemy.normal,4);
+		if(game_cnt==1200)	Enemy_make( -1.75f,   0.7f,30,0.01f,                 0 ,   0,    4,Common.Enemy.normal,4);
+		if(game_cnt==1200)	Enemy_make(  1.75f,   0.8f,30,0.01f,                PI ,   0,    5,Common.Enemy.normal,4);
 		//5:ランダム発生、下方向５弾のみ、すぐ上に戻る
 		for(int i=0;i<12;i++){
 			if(game_cnt==1320+30*i){
-				Enemy_make( Random.value,(float)(1+Random.value),20,0.02f,-(float)(PI / 2   ),           3,            6);
-				Enemy_make(-Random.value,(float)(1+Random.value),20,0.02f,-(float)(PI / 2   ),           3,            6);
+				Enemy_make( Random.value,(float)(1+Random.value),20,0.02f,-(float)(PI  /2),3,6,Common.Enemy.normal,2);
+				Enemy_make(-Random.value,(float)(1+Random.value),20,0.02f,-(float)(PI  /2),3,6,Common.Enemy.normal,2);
 			}
 		}
 		//Warning
@@ -166,16 +166,17 @@ public class GameManager : MonoBehaviour {
 		SCORE.text = ("Score:"+ score);
 	}
 	//敵を生成する関数
-	void Enemy_make(float x,float y,int hp,float speed,float angle,int move_knd,int shoot_knd){
+	void Enemy_make(float x,float y,int hp,float speed,float angle,int move_knd,int shoot_knd,
+		Common.Enemy knd,int item){
 		var go1 = Instantiate( enemy_Prefab ) as GameObject;
 		Enemy enemy = go1.GetComponent<Enemy>();
-		enemy.First(x,y,hp,speed,angle,move_knd,shoot_knd);
+		enemy.First(x,y,hp,speed,angle,move_knd,shoot_knd,knd,item);
 	}
 	//ボスの生成
 	void Boss_make(int hp){
 		var go1 = Instantiate( boss_Prefab ) as GameObject;
 		Enemy boss = go1.GetComponent<Enemy>();
-		boss.First(0,0.50f,hp,0,0,10,10);
+		boss.First(0,0.50f,hp,0,0,10,10,Common.Enemy.boss,20);
 	}
 
 	//画面外の処理
@@ -183,9 +184,10 @@ public class GameManager : MonoBehaviour {
 	void OnTriggerExit2D (Collider2D collider){
             // レイヤー名を取得
             string layerName = LayerMask.LayerToName (collider.gameObject.layer);
-            //画面外に出た敵弾、自機ショット、敵を消去
+            //画面外に出た敵弾、自機ショット、敵、アイテムを消去
             //この関数は最初から画面外にいる場合は一度入らないとならないので敵にもそのまま適用
-            if (layerName == "bullet_enemy" || layerName == "bullet_jiki" || layerName == "enemy"){
+            if (layerName == "bullet_enemy" || layerName == "bullet_jiki" ||
+            	layerName == "enemy" || layerName == "item"){
                 Destroy (collider.gameObject);
             }
     }
