@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
 			Alert.text = "Clear! (HighScore!)";
 			highscore = score;
 			SCORE.text = ("Score:"+ score);
+			HighScoreSave();
 		}
 		else{
 			Alert.fontSize = (int)(30 * Common.Constant.window_rate);
@@ -63,6 +64,10 @@ public class GameManager : MonoBehaviour {
 		menu_move_cnt = 0;
 		Alert.text = "";
 		enemy_hp.text   = "";
+		//ロード
+		if(PlayerPrefs.HasKey("save_highscore")) {
+			highscore = PlayerPrefs.GetInt("save_highscore") ;
+		}
 	}
 	
 	// Update is called once per frame
@@ -78,6 +83,7 @@ public class GameManager : MonoBehaviour {
 				game_cnt = 0;
 				jiki_life = 3 ;
 				score = 0;
+				//
 				Application.LoadLevel("MainMenu");
 			}
 			menu_move_cnt--;
@@ -101,6 +107,7 @@ public class GameManager : MonoBehaviour {
 					Alert.text = "Game Over (HighScore!)";
 					highscore = score;
 					SCORE.text = ("Score:"+ score);
+					HighScoreSave();
 				}
 				else{
 					Alert.fontSize = (int)(30 * Common.Constant.window_rate);
@@ -181,5 +188,9 @@ public class GameManager : MonoBehaviour {
             if (layerName == "bullet_enemy" || layerName == "bullet_jiki" || layerName == "enemy"){
                 Destroy (collider.gameObject);
             }
+    }
+    //ハイスコアセーブ
+    void HighScoreSave(){
+		PlayerPrefs.SetInt("save_highscore",highscore);
     }
 }
