@@ -45,30 +45,30 @@ TextureImporter:
     - name: jiki_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 976
-        width: 48
-        height: 48
+        x: 1
+        y: 977
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jiki_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 928
-        width: 48
-        height: 48
+        x: 1
+        y: 929
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jiki_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 880
-        width: 48
-        height: 48
+        x: 1
+        y: 881
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 50: {fileID: 5000000}
   - 58: {fileID: 5800000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: enemy_boss_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,8 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c6c5d89d81e4ff395a6fefb10474d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  e_bullet0Prefab: {fileID: 100000, guid: 4ae96591009be4881ad0a72e2dd22b07, type: 2}
-  e_bullet1Prefab: {fileID: 100000, guid: 7c484709d7a8d4228b21cfb3d4a74b76, type: 2}
+  hp: 0
+  e_bullet0Prefab: {fileID: 100000, guid: 1db08afc90875467ca36dad49b370072, type: 2}
+  e_bullet1Prefab: {fileID: 100000, guid: 4ae96591009be4881ad0a72e2dd22b07, type: 2}
   pointPrefab: {fileID: 100000, guid: b7c96c747013f4b38aab4ab5deba1f20, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:

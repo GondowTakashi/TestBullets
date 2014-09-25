@@ -418,7 +418,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jiki_Prefab: {fileID: 100000, guid: 6b79b3cbddc4747d5b7dbb8fbae18400, type: 2}
   enemy_Prefab: {fileID: 100000, guid: 4cc223d678f75484eb0e1c0926c474eb, type: 2}
-  boss_Prefab: {fileID: 100000, guid: 7cd1f534f05614e5d869403d9627d10c, type: 2}
+  enemy_spin_Prefab: {fileID: 100000, guid: ed6504f27819c44d0a9d5d50098694ba, type: 2}
+  boss0_Prefab: {fileID: 100000, guid: 7cd1f534f05614e5d869403d9627d10c, type: 2}
+  boss1_Prefab: {fileID: 100000, guid: 36edcf755a6fd4a208121d56dc10aafc, type: 2}
   LIFE: {fileID: 1103159964}
   SCORE: {fileID: 631667043}
   Alert: {fileID: 555283814}
