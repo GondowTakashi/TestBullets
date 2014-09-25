@@ -10,7 +10,6 @@ public class Jiki : MonoBehaviour {
 	private float before_x;
 	private float start_y;
 	private float start_speed;
-	//代入せずにそのままでも使用可
 	public const float PI = Common.Constant.PI;
 	Animator animator;
 	private void Start(){
@@ -72,7 +71,7 @@ public class Jiki : MonoBehaviour {
 				var go = Instantiate( jiki_bulletPrefab ) as GameObject;
 				Jiki_bullet j_bullet = go.GetComponent<Jiki_bullet>();
 				//First(float x,float y,float speed,float angle,int knd,int col)
-				j_bullet.First((float)(this.transform.position.x-0.1+0.2*i),this.transform.position.y,0.2f,(float)(PI / 2 ),0,0);
+				j_bullet.First((float)(this.transform.position.x-0.1+0.2*i),this.transform.position.y,0.2f,(float)(PI / 2 ));
 			}
 		}
 		cnt++;

@@ -10,41 +10,66 @@ public class GameManager : MonoBehaviour {
 	public GUIText SCORE;
 	public GUIText Alert;
 	public GUIText enemy_hp;
+	public int game_cnt;
+
+	static int gamelevel;
+	static int highscore;
+
 	private bool jiki_alive;
 	private int jiki_life;
-	public int game_cnt;
 	private int score;
 	private int menu_move_cnt;
-	//代入せずにそのままでも使用可
 	public const float PI = Common.Constant.PI;
-
+	//難易度設定
+	public void SetLevel(int level){
+		gamelevel = level;
+	}
+	//難易度取得
+	public int GetLevel(){
+		int level = gamelevel;
+		//外部参照(弾発生)時level3(0Life)はlevel2と同じ
+		if(level != 1 && level != 2){
+			level = 2;
+		}
+		return level;
+	}
     //スコア加算
     public void AddScore(int s){
-    	score += s;
+    	//レベルそのまま倍率とする
+    	score += s * gamelevel;
     }
     //ゲームクリア処理
     public void GameClear(){
-		Alert.text = "Clear!";
+		if(score > highscore){
+			Alert.fontSize = (int)(24 * Common.Constant.window_rate);
+			Alert.text = "Clear! (HighScore!)";
+			highscore = score;
+			SCORE.text = ("Score:"+ score);
+		}
+		else{
+			Alert.fontSize = (int)(30 * Common.Constant.window_rate);
+			Alert.text = "Clear!";
+		}
 		menu_move_cnt = 121;
     }
 
 	// Use this for initialization
 	void Start () {
 		game_cnt = -60;
-		jiki_life = 3 ;
+		if(gamelevel==3) 	jiki_life = 0 ;
+		else				jiki_life = 3 ;
 		jiki_alive = false;
 		score = 0;
 		menu_move_cnt = 0;
 		Alert.text = "";
-		Alert.fontSize =40;
 		enemy_hp.text   = "";
-		enemy_hp.fontSize =30;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//メインメニュー中
 		if(Application.loadedLevelName=="MainMenu"){
+			SCORE.text = ("HighScore:"+ highscore);
 			return;
 		}
 		//メインメニュー以降直前
@@ -70,10 +95,19 @@ public class GameManager : MonoBehaviour {
 			else{
 				menu_move_cnt = 121;
 				jiki_life = 0 ;
-				Alert.text = "Game Over";
+				LIFE.text  = ("LIFE : X");
+				if(score > highscore){
+					Alert.fontSize = (int)(24 * Common.Constant.window_rate);
+					Alert.text = "Game Over (HighScore!)";
+					highscore = score;
+					SCORE.text = ("Score:"+ score);
+				}
+				else{
+					Alert.fontSize = (int)(30 * Common.Constant.window_rate);
+					Alert.text = "Game Over";
+				}
 				return;
-			}
-			
+			}	
 		}
 		if(GameObject.Find("jiki")==null&&GameObject.Find("jiki(Clone)")==null) {
 			jiki_alive = false;
@@ -112,7 +146,7 @@ public class GameManager : MonoBehaviour {
 		}
 		//Warning
 		if(1680 <= game_cnt && game_cnt < 1800){
-			if(game_cnt % 10 <5 )	Alert.text = "Warning";
+			if(game_cnt % 10 <5 )	Alert.text = "Warning!";
 			else					Alert.text = "";
 		}
 		//ボス
@@ -120,9 +154,8 @@ public class GameManager : MonoBehaviour {
 			Boss_make(800);
 			Alert.text = "";
 		}
-
 		game_cnt++;
-		LIFE.text  = ("LIFE:"+ jiki_life);
+		LIFE.text  = ("LIFE : "+ jiki_life);
 		SCORE.text = ("Score:"+ score);
 	}
 	//敵を生成する関数
