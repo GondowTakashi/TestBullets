@@ -6,6 +6,6 @@ namespace Common
 		public static readonly float window_rate = Screen.height / 400.0f;
 	}
 	public enum Enemy{
-		normal,boss
+		normal,spin,boss
 	}
 }
