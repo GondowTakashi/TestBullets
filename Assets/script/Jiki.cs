@@ -76,11 +76,21 @@ public class Jiki : MonoBehaviour {
 		}
 		cnt++;
 	}
-	//敵弾・敵との当たり判定
-	void OnTriggerEnter2D(){
-		//生成後の上昇中から60fは判定を行わない
-		if(this.cnt > 60){
-			Destroy(this.gameObject);
+	void OnTriggerEnter2D(Collider2D collider){
+        // レイヤー名を取得
+        string layerName = LayerMask.LayerToName (collider.gameObject.layer);
+		if (layerName == "item" ){
+			var go = GameObject.Find("back") as GameObject;
+			GameManager game = go.GetComponent(typeof(GameManager)) as GameManager;
+			game.AddScore(50);
+			Destroy(collider.gameObject);
+		}
+		//敵弾・敵との当たり判定
+		else{
+			//生成後の上昇中から60fは判定を行わない
+			if(this.cnt > 60){
+				Destroy(this.gameObject);
+			}
 		}
 	}
 	//クリック中に射撃
