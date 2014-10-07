@@ -15,6 +15,9 @@ public class PointItem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//移動制御は重力で行っている
+//		Vector3 pos = this.transform.position;
+//		pos.y -= 0.02f;
+//		this.transform.position = pos;
 	}
 
 }

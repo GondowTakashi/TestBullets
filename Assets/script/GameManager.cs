@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
     //ゲームクリア処理
     public void GameClear(){
 		if(score > highscore){
-			Alert.fontSize = (int)(24 * Common.Constant.window_rate);
+			Alert.fontSize = (int)(21 * Common.Constant.window_rate);
 			Alert.text = "Clear! (HighScore!)";
 			highscore = score;
 			SCORE.text = ("Score:"+ score);
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour {
 				jiki_life = 0 ;
 				LIFE.text  = ("LIFE : X");
 				if(score > highscore){
-					Alert.fontSize = (int)(24 * Common.Constant.window_rate);
+					Alert.fontSize = (int)(21 * Common.Constant.window_rate);
 					Alert.text = "Game Over (HighScore!)";
 					highscore = score;
 					SCORE.text = ("Score:"+ score);
@@ -199,17 +199,17 @@ public class GameManager : MonoBehaviour {
 		//2:ランダム発生、回転敵下方向左右反射
 		for(int i=0;i<6;i++){
 			if(game_cnt==480+120*i){
-							Enemy_make(-Random.value,2,40,0.03f,-(float)(PI/2+PI/3*Random.value),
+							Enemy_make(-Random.value,2,20,0.03f,-(float)(PI/2+PI/3*Random.value),
 							   														   10,   11,Common.Enemy.spin,6);
 			}
 		}
 		//3:左右順に高速降下敵
 		for(int i=0;i<5;i++){
 			if(game_cnt==1200+30*i){
-							Enemy_make(-1+0.4f*i,2.2f,20,0.08f,-(float)(PI/2),       0,   12,Common.Enemy.spin,3);
+							Enemy_make(-1+0.4f*i,2.2f,10,0.08f,-(float)(PI/2),       0,   12,Common.Enemy.spin,3);
 			}
 			if(game_cnt==1440+30*i){
-							Enemy_make( 1-0.4f*i,2.2f,20,0.08f,-(float)(PI/2),       0,   12,Common.Enemy.spin,3);
+							Enemy_make( 1-0.4f*i,2.2f,10,0.08f,-(float)(PI/2),       0,   12,Common.Enemy.spin,3);
 			}
 		}
 		//4:斜め同時
